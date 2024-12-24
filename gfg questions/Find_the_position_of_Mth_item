@@ -1,0 +1,13 @@
+class Solution {
+    static int findPosition(int N, int M, int K) {
+        // Calculate the position of the M-th item
+        int ans = (K + M - 1) % N;
+        
+        // If modulo result is 0, it means the position is N
+        if (ans == 0) {
+            return N;
+        }
+        
+        return ans;
+    }
+}
