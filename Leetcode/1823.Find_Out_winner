@@ -21,3 +21,17 @@ class Solution {
         return queue.peek();
     }
 }
+
+
+// OPTIMIZED SOLUTION FOR THIS QUESTION  WITH O(1) TIME COMPLEXITY
+
+class Solution {
+    int solve(int n,int k)
+    {
+        if(n==0) return 0;
+        return (solve(n-1,k)+k)%n;
+    }
+    public int findTheWinner(int n, int k) {
+        return solve(n,k)+1;
+    }
+}
