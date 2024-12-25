@@ -1,0 +1,63 @@
+import java.util.*;
+class Items{
+    int value,weight;
+    double ratio;
+    Items(int value,int weight)
+    {
+        this.value=value;
+        this.weight=weight;
+        this.ratio = (double)value/weight;
+    }
+}
+
+class Result
+{
+  static double fractionalKnapsack(int val[], int weight[], int n, int capacity)
+  {
+      Items[] item = new Items[n];
+      for(int i=0;i<n;i++)
+      {
+          item[i]=new Items(val[i],weight[i]);
+      }
+      Arrays.sort(item,(a,b)->Double.compare(b.ratio,a.ratio));
+      int currentCapacity= capacity;
+      double totalValue=0.0;
+      for(int i=0;i<n;i++)
+      {
+          if(currentCapacity==0) break;
+          if(item[i].weight<=currentCapacity)
+          {
+              totalValue+=item[i].value;
+              currentCapacity-=item[i].weight;
+          }
+          else{
+              double fraction = (double) currentCapacity/item[i].weight;
+              totalValue+=item[i].value*fraction;
+              currentCapacity=0;
+          }
+      }
+      return totalValue;
+  }
+}
+class Main
+{
+  public static void main(String[] args)
+  {
+    double p;
+    String sp;
+    int i, n, k, cap;
+    Scanner s=new Scanner(System.in);
+    n = Integer.parseInt(s.nextLine().trim());
+    int a[]=new int[n];
+    int b[]=new int[n];
+    for(i=0;i<n;i++)
+      a[i] = s.nextInt();
+    sp = (s.nextLine().trim());
+    for(i=0;i<n;i++)
+      b[i] = s.nextInt();
+    sp = (s.nextLine().trim());
+    cap = s.nextInt();
+    p = Result.fractionalKnapsack(a,b,n,cap);
+    System.out.printf("%.1f", p);
+  }
+}
